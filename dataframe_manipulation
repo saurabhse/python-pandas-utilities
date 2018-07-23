@@ -51,6 +51,11 @@ df['col1'] = df.apply(lambda row:4,axis=1) # setting value as 4. function can be
 # value exists or negate in a column
 df = df[~df['col1'].isin(2)]
 
+# combine multiple column values and filter 
+mask = df.col1.astype(str).str.cat(df.col2.astype(str),sep='-').str.cat(df.col3.astype(str),sep='-')
+df = df[~mask]
+
+
 
 
 
