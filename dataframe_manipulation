@@ -1,0 +1,62 @@
+import pandas as pd
+
+
+df_data = {'col1':[1,2,3],'col2':['a','b','c']}
+df = pd.DataFrame(data=df_data)
+
+#replace value of column based on a condition
+df['col1'].loc[df['col1'] == 1] = 5
+
+#fill na with value
+df.fillna("blank_value",inplace=true)
+
+# rename columns
+df.rename(columns={'col1':'col5'},inplace=True)
+
+# filter
+df = df[df['col1'] != 1]
+df=df.loc[df['col1'] == 1]
+df = df[pd.notnull(df['col1'])] #filter out null values
+
+
+# set value of column
+df['col3'] = "default_val"
+
+# Removing duplicates
+df = df.drop_duplicates(subset=['col1'],keep='first')
+df = df.drop_duplicates(subset=['col1','col2'],keep='first') # multiple columns
+
+
+# check if column present in df columns
+if 'col' in df.columns:
+  print('present')
+  
+# check if multiple columns present in df columns
+if pd.Series(['col1','col2']).isin(df.columns).all():
+    print('present')
+    
+# fetch unique values from column as list
+value_list = df['col1'].unique().tolist()
+
+# fetch df with values having null value in column
+df = df[df['col1'].isnull()]
+
+
+# setting type of column explicitly
+df.loc[:,('col1')] = df.loc[:,('col1')].astype("object")
+
+# apply logic to df column value
+df['col1'] = df.apply(lambda row:4,axis=1) # setting value as 4. function can be invoked instead of 4
+
+# value exists or negate in a column
+df = df[~df['col1'].isin(2)]
+
+
+
+
+
+  
+
+
+
+
